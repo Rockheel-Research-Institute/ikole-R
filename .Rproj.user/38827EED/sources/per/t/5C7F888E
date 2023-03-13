@@ -1,0 +1,28 @@
+{
+    "id": "5C7F888E",
+    "path": "D:/X-Files/R Projects/Playground/regerjrykytk/ikoleR/ikole-R/R/whisper.R",
+    "project_path": "R/whisper.R",
+    "type": "r_source",
+    "hash": "348200380",
+    "contents": "",
+    "dirty": false,
+    "created": 1678667592028.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "13,4",
+        "scrollLine": "0",
+        "docOutlineVisible": "1",
+        "docOutlineSize": "192"
+    },
+    "folds": "24|83|36|0|\n85|28|97|0|\n214|43|218|0|\n",
+    "lastKnownWriteTime": 1678680384,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1678680384738,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,28 @@
+{
+    "id": "ADC71DAA",
+    "path": "D:/X-Files/R Projects/Playground/regerjrykytk/ikoleR/ikole-R/C++/Whisper/rcpp_whisper.cpp",
+    "project_path": "C++/Whisper/rcpp_whisper.cpp",
+    "type": "cpp",
+    "hash": "1833595836",
+    "contents": "",
+    "dirty": false,
+    "created": 1678670559625.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "15,18",
+        "scrollLine": "0",
+        "docOutlineVisible": "1",
+        "docOutlineSize": "267"
+    },
+    "folds": "24|57|37|0|\n39|51|41|0|\n44|92|51|0|\n54|23|80|0|\n83|32|87|0|\n89|96|181|0|\n185|20|194|0|\n191|18|193|2|\n210|68|444|0|\n450|61|465|0|\n",
+    "lastKnownWriteTime": 1678687030,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1678687030852,
+    "read_only": false,
+    "read_only_alternatives": []
+}

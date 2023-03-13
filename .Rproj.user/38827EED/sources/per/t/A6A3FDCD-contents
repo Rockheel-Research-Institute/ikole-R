@@ -1,0 +1,35 @@
+---
+title: "Testing"
+author: "Sanmi"
+date: "2023-03-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(Rcpp)
+
+#library(cpp11)
+
+source("../ikole-R/R/whisper.R")
+Rcpp::sourceCpp("../ikole-R/C++/Whisper/rcpp_whisper.cpp")
+Rcpp::sourceCpp("../ikole-R/C++/Whisper/whisper.cpp")
+
+#include "D:\X-Files\R Projects\Playground\regerjrykytk\ikoleR\ikole-R\C\ggml.h"
+#Rcpp::sourceCpp(paste0(getwd(),"/C/ggml.c"))
+
+
+
+
+```
+
+
+```{r}
+
+model_download<-whisper_download_model(x="tiny")
+
+```

@@ -1,0 +1,12 @@
+"0","model_download<-whisper_download_model(x=""tiny"")
+"
+"2","trying URL 'https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin'
+"
+"2","Content type 'application/octet-stream'"
+"2"," length 77691713 bytes (74.1 MB)
+"
+"2","downloaded 74.1 MB
+
+"
+"2","Downloading finished, model stored at 'D:/X-Files/R Projects/Playground/regerjrykytk/ikoleR/ikole-R/models/Whisper/ggml-tiny.bin'
+"

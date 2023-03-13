@@ -15,7 +15,7 @@
 #' @export
 #' @seealso \code{\link{whisper}}
 #' @examples
-#' \dontrun{ 
+#' \dontrun{
 #' model <- whisper("tiny")
 #' audio <- system.file(package = "audio.whisper", "samples", "jfk.wav")
 #' trans <- predict(model, newdata = audio)
@@ -30,7 +30,7 @@ predict.whisper <- function(object, newdata, language = "auto", trim = FALSE, ..
   Encoding(out$tokens$token) <- "UTF-8"
   if(trim){
     out$data$text              <- trimws(out$data$text)
-    out$tokens$token           <- trimws(out$tokens$token)  
+    out$tokens$token           <- trimws(out$tokens$token)
   }
   class(out) <- "whisper_transcription"
   out
@@ -39,17 +39,17 @@ predict.whisper <- function(object, newdata, language = "auto", trim = FALSE, ..
 
 #' @title Automatic Speech Recognition using Whisper
 #' @description Automatic Speech Recognition using Whisper on 16-bit WAV files
-#' @param x the path to a model, an object returned by \code{\link{whisper_download_model}} or a character string with 
+#' @param x the path to a model, an object returned by \code{\link{whisper_download_model}} or a character string with
 #' the name of the model which can be passed on to \code{\link{whisper_download_model}}
 #' @param ... further arguments, currently not used
-#' @return an object of class \code{whisper} which is list with the following elements: 
+#' @return an object of class \code{whisper} which is list with the following elements:
 #' \itemize{
 #' \item{file: path to the model}
 #' \item{model: an Rcpp pointer to the loaded Whisper model}
 #' }
 #' @export
 #' @examples
-#' \dontrun{ 
+#' \dontrun{
 #' model <- whisper("tiny")
 #' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"))
 #' trans
@@ -65,22 +65,22 @@ predict.whisper <- function(object, newdata, language = "auto", trim = FALSE, ..
 #' model <- whisper("large")
 #' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"))
 #' trans
-#' 
+#'
 #' ## Or download the model explicitely
 #' path  <- whisper_download_model("tiny")
 #' model <- whisper(path)
 #' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"))
 #' }
-#' 
+#'
 #' \dontshow{
 #' ## Or provide the path to the model
 #' path  <- system.file(package = "audio.whisper", "models", "for-tests-ggml-tiny.bin")
 #' model <- whisper(path)
-#' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"), 
+#' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"),
 #'                  language = "en", duration = 1000)
 #' path  <- system.file(package = "audio.whisper", "models", "for-tests-ggml-tiny.en.bin")
 #' model <- whisper(path)
-#' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"), 
+#' trans <- predict(model, newdata = system.file(package = "audio.whisper", "samples", "jfk.wav"),
 #'                  language = "en", duration = 1000)
 #' }
 whisper <- function(x, ...){
@@ -90,9 +90,9 @@ whisper <- function(x, ...){
   if(inherits(x, "whisper_download")){
     out        <- list(file = x$file_model)
   }else{
-    out        <- list(file = x)  
+    out        <- list(file = x)
   }
-  out$model <- whisper_load_model(out$file)
+  out$model <- whisper_load_model(out$file) #the cpp function used here
   class(out) <- "whisper"
   out
 }
@@ -113,11 +113,11 @@ whisper <- function(x, ...){
 #' \item{'ggerganov': https://ggml.ggerganov.com/}
 #' \item{'huggingface': https://huggingface.co/datasets/ggerganov/whisper.cpp}
 #' }
-#' @param overwrite logical indicating to overwrite the file if the file was already downloaded. Defaults to \code{TRUE} indicating 
+#' @param overwrite logical indicating to overwrite the file if the file was already downloaded. Defaults to \code{TRUE} indicating
 #' it will download the model and overwrite the file if the file already existed. If set to \code{FALSE},
 #' the model will only be downloaded if it does not exist on disk yet in the \code{model_dir} folder.
 #' @param ... currently not used
-#' @return A data.frame with 1 row and the following columns: 
+#' @return A data.frame with 1 row and the following columns:
 #' \itemize{
 #'  \item{model: }{The model as provided by the input parameter \code{x}}
 #'  \item{file_model: }{The path to the file on disk where the model was downloaded to}
@@ -139,7 +139,7 @@ whisper <- function(x, ...){
 #' whisper_download_model("medium.en")
 #' whisper_download_model("large-v1")
 #' whisper_download_model("large")
-#' 
+#'
 #' whisper_download_model("tiny", repos = "ggerganov")
 #' whisper_download_model("tiny.en", repos = "ggerganov")
 #' }
@@ -147,9 +147,9 @@ whisper <- function(x, ...){
 #' if(file.exists(path$file_model)) file.remove(path$file_model)
 #' }
 whisper_download_model <- function(x = c("tiny", "tiny.en", "base", "base.en", "small", "small.en", "medium", "medium.en", "large-v1", "large"),
-                                   model_dir = getwd(),
+                                   model_dir = paste0(getwd(),"/models/Whisper"),
                                    repos = c("huggingface", "ggerganov"),
-                                   overwrite = TRUE, 
+                                   overwrite = TRUE,
                                    ...){
   x     <- match.arg(x)
   repos <- match.arg(repos)
@@ -161,14 +161,14 @@ whisper_download_model <- function(x = c("tiny", "tiny.en", "base", "base.en", "
     url <- sprintf("https://ggml.ggerganov.com/%s", f)
   }
   if(!dir.exists(model_dir)){
-    dir.create(model_dir, recursive = TRUE)  
+    dir.create(model_dir, recursive = TRUE)
   }
   to <- file.path(model_dir, basename(url))
   download_failed  <- FALSE
   download_message <- "OK"
   if(overwrite || !file.exists(to)){
     dl <- suppressWarnings(try(
-      utils::download.file(url = url, destfile = to, mode = "wb"),  
+      utils::download.file(url = url, destfile = to, mode = "wb"),
       silent = TRUE))
     if(inherits(dl, "try-error")){
       download_failed  <- TRUE
@@ -199,7 +199,7 @@ whisper_download_model <- function(x = c("tiny", "tiny.en", "base", "base.en", "
 
 
 #' @title Benchmark a Whisper model
-#' @description Benchmark a Whisper model to see how good it runs on your architecture by printing it's performance on 
+#' @description Benchmark a Whisper model to see how good it runs on your architecture by printing it's performance on
 #' fake data. \url{https://github.com/ggerganov/whisper.cpp/issues/89}
 #' @param object a whisper object
 #' @param threads the number of threads to use, defaults to 1
@@ -207,11 +207,11 @@ whisper_download_model <- function(x = c("tiny", "tiny.en", "base", "base.en", "
 #' @export
 #' @seealso \code{\link{whisper}}
 #' @examples
-#' \dontrun{ 
+#' \dontrun{
 #' model <- whisper("tiny")
 #' whisper_benchmark(model)
 #' }
-whisper_benchmark <- function(object = whisper(system.file(package = "audio.whisper", "models", "for-tests-ggml-tiny.bin")), 
+whisper_benchmark <- function(object = whisper(system.file(package = "audio.whisper", "models", "for-tests-ggml-tiny.bin")),
                               threads = 1){
   stopifnot(inherits(object, "whisper"))
   whisper_print_benchmark(object$model, threads)
